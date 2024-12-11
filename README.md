@@ -56,7 +56,21 @@ and
 
 only "name", "status", "created at"  should be relevant for monitoring.
 
+### Regions
+
+the name contains the region - seperated by ":::"
+	
+	APAC -- asia-pacific 
+	AMER -- america
+    EMEA -- Europe, the Middle East and Africa
+    GLOB -- Worldwide 
+    CORE -- Core ?
+
 ## manually checking this with : 
 
 curl -s 'https://status.watchguard.com/api/v2/summary.json' | jq  -r '.components[] | [.status, .name] | join (" ") '  | grep -v "^operational" | grep -v ":::(AMER|APAC)"
 
+
+
+
+	
