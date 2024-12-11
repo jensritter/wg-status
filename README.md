@@ -1,16 +1,13 @@
 # wg-cloudstatus
+
 Nagios/Icinga Plugin to check https://status.watchguard.com/
 
-This Status-Page displayes the Content of this json-endpoints : 
+This Status-Page displayes the Content of this json-endpoints :
 
     https://status.watchguard.com/api/v2/summary.json
-
-and 
-
     https://status.watchguard.com/api/v2/incidents.json
 
-
-## Format of summary.json
+## Format of https://status.watchguard.com/api/v2/summary.json
 
     {
         page: {
@@ -34,8 +31,8 @@ and
         }
     }
 
+## component - Schema
 
-## component - Object
 (Elements in .components)
 
     {
@@ -54,23 +51,22 @@ and
         "only_show_if_degraded": false
     }
 
-only "name", "status", "created at"  should be relevant for monitoring.
+Only "name" and "status" should be relevant for monitoring.
 
 ### Regions
 
-the name contains the region - seperated by ":::"
-	
+The name contains the region - seperated by ":::"
+
 	APAC -- asia-pacific 
 	AMER -- america
     EMEA -- Europe, the Middle East and Africa
     GLOB -- Worldwide 
     CORE -- Core ?
 
-## manually checking this with : 
+## manually checking this with :
 
-curl -s 'https://status.watchguard.com/api/v2/summary.json' | jq  -r '.components[] | [.status, .name] | join (" ") '  | grep -v "^operational" | grep -v ":::(AMER|APAC)"
-
-
+    curl -s 'https://status.watchguard.com/api/v2/summary.json' | jq  -r '.components[] | [.status, .name] | join (" ") '  | grep -v "^operational" | grep -v ":::(AMER|APAC)"
 
 
-	
+
+
